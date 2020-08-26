@@ -1,1 +1,5 @@
 # bugtracker
+
+superuser:
+kevin
+kevin
