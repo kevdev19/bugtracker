@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Home{% endblock title %}
+
+
+{% block content %}
+<h1>Bug Tracker App Home</h1>
+
+{% for ticket in new_tickets %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">
+                        <h5 class="card-title">{{ ticket.title }}</h5>
+                    </a>
+                    <p class="card-text">{{ ticket.description }}</p>
+                    <p class="card-text">{{ ticket.status }}</p>
+                    <p class="card-text">{{ ticket.time_submitted }}</p>
+                    <p class="card-text">Created by: {{ ticket.createdby }}</p>
+                    <p class="card-text">Assigned to: {{ ticket.assignedto }}</p>
+                    <p class="card-text">Completed by: {{ ticket.completedby }}</p>
+                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">View Ticket</a>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+{% for ticket in done_tickets %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">
+                        <h5 class="card-title">{{ ticket.title }}</h5>
+                    </a>
+                    <p class="card-text">{{ ticket.description }}</p>
+                    <p class="card-text">{{ ticket.status }}</p>
+                    <p class="card-text">{{ ticket.time_submitted }}</p>
+                    <p class="card-text">Created by: {{ ticket.createdby }}</p>
+                    <p class="card-text">Assigned to: {{ ticket.assignedto }}</p>
+                    <p class="card-text">Completed by: {{ ticket.completedby }}</p>
+                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">View Ticket</a>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+{% for ticket in in_progress_tickets %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">
+                        <h5 class="card-title">{{ ticket.title }}</h5>
+                    </a>
+                    <p class="card-text">{{ ticket.description }}</p>
+                    <p class="card-text">{{ ticket.status }}</p>
+                    <p class="card-text">{{ ticket.time_submitted }}</p>
+                    <p class="card-text">Created by: {{ ticket.createdby }}</p>
+                    <p class="card-text">Assigned to: {{ ticket.assignedto }}</p>
+                    <p class="card-text">Completed by: {{ ticket.completedby }}</p>
+                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">View Ticket</a>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+{% for ticket in invalid_tickets %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">
+                        <h5 class="card-title">{{ ticket.title }}</h5>
+                    </a>
+                    <p class="card-text">{{ ticket.description }}</p>
+                    <p class="card-text">{{ ticket.status }}</p>
+                    <p class="card-text">{{ ticket.time_submitted }}</p>
+                    <p class="card-text">Created by: {{ ticket.createdby }}</p>
+                    <p class="card-text">Assigned to: {{ ticket.assignedto }}</p>
+                    <p class="card-text">Completed by: {{ ticket.completedby }}</p>
+                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">View Ticket</a>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+
+{% endblock %}
