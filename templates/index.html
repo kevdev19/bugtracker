@@ -7,73 +7,114 @@
 {% block content %}
 <h1>Bug Tracker App Home</h1>
 
-{% for ticket in new_tickets %}
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">
-                        <h5 class="card-title">{{ ticket.title }}</h5>
-                    </a>
-                    <p class="card-text">{{ ticket.description }}</p>
-                    <p class="card-text">{{ ticket.status }}</p>
-                    <p class="card-text">{{ ticket.time_submitted }}</p>
-                    <p class="card-text">Created by: {{ ticket.createdby }}</p>
-                    <p class="card-text">Assigned to: {{ ticket.assignedto }}</p>
-                    <p class="card-text">Completed by: {{ ticket.completedby }}</p>
-                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">View Ticket</a>
-                </div>
+<div class="card">
+            <h5 class="card-header">NEW</h5>
+            <div class="card-body">
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Assigned</th>
+      <th scope="col">Reported By</th>
+      <th scope="col">Ticket Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ticket in new_tickets %}
+        <tr>
+            <th scope="row">{{ticket.id}}</th>
+            <td>{{ticket.title}}</td>
+            <td>{{ticket.assignedto}}</td>
+            <td>{{ticket.reportedby}}</td>
+            <td>{{ticket.time_submitted}}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
             </div>
-            <br>
-            {% endfor %}
-{% for ticket in done_tickets %}
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">
-                        <h5 class="card-title">{{ ticket.title }}</h5>
-                    </a>
-                    <p class="card-text">{{ ticket.description }}</p>
-                    <p class="card-text">{{ ticket.status }}</p>
-                    <p class="card-text">{{ ticket.time_submitted }}</p>
-                    <p class="card-text">Created by: {{ ticket.createdby }}</p>
-                    <p class="card-text">Assigned to: {{ ticket.assignedto }}</p>
-                    <p class="card-text">Completed by: {{ ticket.completedby }}</p>
-                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">View Ticket</a>
-                </div>
+</div>
+
+<div class="card">
+            <h5 class="card-header">DONE</h5>
+            <div class="card-body">
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Assigned</th>
+      <th scope="col">Reported By</th>
+      <th scope="col">Ticket Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ticket in done_tickets %}
+        <tr>
+            <th scope="row">{{ticket.id}}</th>
+            <td>{{ticket.title}}</td>
+            <td>{{ticket.assignedto}}</td>
+            <td>{{ticket.reportedby}}</td>
+            <td>{{ticket.time_submitted}}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
             </div>
-            <br>
-            {% endfor %}
-{% for ticket in in_progress_tickets %}
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">
-                        <h5 class="card-title">{{ ticket.title }}</h5>
-                    </a>
-                    <p class="card-text">{{ ticket.description }}</p>
-                    <p class="card-text">{{ ticket.status }}</p>
-                    <p class="card-text">{{ ticket.time_submitted }}</p>
-                    <p class="card-text">Created by: {{ ticket.createdby }}</p>
-                    <p class="card-text">Assigned to: {{ ticket.assignedto }}</p>
-                    <p class="card-text">Completed by: {{ ticket.completedby }}</p>
-                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">View Ticket</a>
-                </div>
+<div class="card">
+            <h5 class="card-header">IN PROGRESS</h5>
+            <div class="card-body">
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Assigned</th>
+      <th scope="col">Reported By</th>
+      <th scope="col">Ticket Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ticket in in_progress_tickets %}
+        <tr>
+            <th scope="row">{{ticket.id}}</th>
+            <td>{{ticket.title}}</td>
+            <td>{{ticket.assignedto}}</td>
+            <td>{{ticket.reportedby}}</td>
+            <td>{{ticket.time_submitted}}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
             </div>
-            <br>
-            {% endfor %}
-{% for ticket in invalid_tickets %}
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">
-                        <h5 class="card-title">{{ ticket.title }}</h5>
-                    </a>
-                    <p class="card-text">{{ ticket.description }}</p>
-                    <p class="card-text">{{ ticket.status }}</p>
-                    <p class="card-text">{{ ticket.time_submitted }}</p>
-                    <p class="card-text">Created by: {{ ticket.createdby }}</p>
-                    <p class="card-text">Assigned to: {{ ticket.assignedto }}</p>
-                    <p class="card-text">Completed by: {{ ticket.completedby }}</p>
-                    <a href="/ticket/{{ticket.id}}" class="card-link" style="color: orange;">View Ticket</a>
-                </div>
+
+<div class="card">
+            <h5 class="card-header">INVALID</h5>
+            <div class="card-body">
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Assigned</th>
+      <th scope="col">Reported By</th>
+      <th scope="col">Ticket Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ticket in invalid_tickets %}
+        <tr>
+            <th scope="row">{{ticket.id}}</th>
+            <td>{{ticket.title}}</td>
+            <td>{{ticket.assignedto}}</td>
+            <td>{{ticket.reportedby}}</td>
+            <td>{{ticket.time_submitted}}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
             </div>
-            <br>
-        {% endfor %}
+</div>
 
 {% endblock %}
+

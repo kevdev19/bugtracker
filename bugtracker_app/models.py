@@ -14,7 +14,8 @@ class Ticket(models.Model):
     time_submitted = models.DateTimeField(
         default=now, editable=False)
     description = models.TextField(max_length=255)
-    createdby = models.ForeignKey(CustomUserModel, on_delete=models.CASCADE)
+    createdby = models.ForeignKey(
+        CustomUserModel, null=True, on_delete=models.CASCADE)
     status = models.CharField(
         max_length=32,
         choices=StatusChoices.choices,
