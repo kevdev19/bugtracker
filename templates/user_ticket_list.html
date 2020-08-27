@@ -16,6 +16,7 @@
         {{ ticket.title }}
         {{ ticket.assignedto }}
         <a href="{% url 'userticketlist' ticket.createdby %}">{{ticket.createdby}}</a>
+        {{ ticket.time_submitted|timesince:now }}
     {% elif ticket.status == 'In Progress' %}
         <h3>In Progress Tickets</h3>
         {{ ticket.id }}

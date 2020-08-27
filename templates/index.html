@@ -11,124 +11,127 @@
 <button type="button" class="btn btn-secondary active"><a href='{% url 'addticket'%}'>Create Ticket</a></button>
 
 <div class="card">
-            <h5 class="card-header">NEW</h5>
-            <div class="card-body">
-            <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Assigned To</th>
-      <th scope="col">Reported By</th>
-      <th scope="col">Ticket Age</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for ticket in new_tickets %}
-        <tr>
+  <h5 class="card-header">NEW</h5>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Assigned To</th>
+            <th scope="col">Reported By</th>
+            <th scope="col">Ticket Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ticket in new_tickets %}
+          <tr>
             <th scope="row">{{ticket.id}}</th>
-            <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
-            <td>{{ticket.assignedto}}</td>
-            <td><a href="{% url 'userticketlist' ticket.createdby %}">{{ticket.createdby}}</a></td>
-            {% comment %} calculates difference between time ticket submitted and now 
-            resource link: https://tinyurl.com/yyjtydtk
-            {% endcomment %}
-            <td>{{ ticket.time_submitted|timesince:now }}</td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
-            </div>
+              <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
+              <td>{{ticket.assignedto}}</td>
+              <td><a href="{% url 'userticketlist' ticket.createdby %}">{{ticket.createdby}}</a></td>
+              {% comment %} calculates difference between time ticket submitted and now 
+              resource link: https://tinyurl.com/yyjtydtk
+              {% endcomment %}
+              <td>{{ ticket.time_submitted|timesince:now }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 </div>
 
 <div class="card">
-            <h5 class="card-header">DONE</h5>
-            <div class="card-body">
-            <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Assigned To</th>
-      <th scope="col">Reported By</th>
-      <th scope="col">Ticket Age</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for ticket in done_tickets %}
-        <tr>
+  <h5 class="card-header">IN PROGRESS</h5>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Assigned To</th>
+            <th scope="col">Reported By</th>
+            <th scope="col">Ticket Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ticket in in_progress_tickets %}
+          <tr>
             <th scope="row">{{ticket.id}}</th>
-            <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
-            <td>{{ticket.assignedto}}</td>
-            <td><a href="{% url 'userticketlist' ticket.createdby %}">{{ticket.createdby}}</a></td>
-            {% comment %} calculates difference between time ticket submitted and now 
-            resource link: https://tinyurl.com/yyjtydtk
-            {% endcomment %}
-            <td>{{ ticket.time_submitted|timesince:now }}</td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
-            </div>
-<div class="card">
-            <h5 class="card-header">IN PROGRESS</h5>
-            <div class="card-body">
-            <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Assigned To</th>
-      <th scope="col">Reported By</th>
-      <th scope="col">Ticket Age</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for ticket in in_progress_tickets %}
-        <tr>
-            <th scope="row">{{ticket.id}}</th>
-            <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
-            <td>{{ticket.assignedto}}</td>
-            <td><a href="{% url 'userticketlist' ticket.createdby %}">{{ticket.createdby}}</a></td>
-            {% comment %} calculates difference between time ticket submitted and now 
-            resource link: https://tinyurl.com/yyjtydtk
-            {% endcomment %}
-            <td>{{ ticket.time_submitted|timesince:now }}</td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
-            </div>
+              <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
+              <td>{{ticket.assignedto}}</td>
+              <td><a href="{% url 'userticketlist' ticket.createdby %}">{{ticket.createdby}}</a></td>
+              {% comment %} calculates difference between time ticket submitted and now 
+              resource link: https://tinyurl.com/yyjtydtk
+              {% endcomment %}
+              <td>{{ ticket.time_submitted|timesince:now }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
 
 <div class="card">
-            <h5 class="card-header">INVALID</h5>
-            <div class="card-body">
-            <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Assigned To</th>
-      <th scope="col">Reported By</th>
-      <th scope="col">Ticket Age</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for ticket in invalid_tickets %}
-        <tr>
+  <h5 class="card-header">DONE</h5>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Assigned To</th>
+            <th scope="col">Reported By</th>
+            <th scope="col">Ticket Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ticket in done_tickets %}
+          <tr>
             <th scope="row">{{ticket.id}}</th>
-            <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
-            <td>{{ticket.assignedto}}</td>
-            <td><a href="{% url 'userticketlist' ticket.createdby %}">{{ticket.createdby}}</a></td>
-            {% comment %} calculates difference between time ticket submitted and now 
-            resource link: https://tinyurl.com/yyjtydtk
-            {% endcomment %}
-            <td>{{ ticket.time_submitted|timesince:now }}</td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
-            </div>
+              <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
+              <td>{{ticket.assignedto}}</td>
+              <td><a href="{% url 'userticketlist' ticket.createdby %}">{{ticket.createdby}}</a></td>
+              {% comment %} calculates difference between time ticket submitted and now 
+              resource link: https://tinyurl.com/yyjtydtk
+              {% endcomment %}
+              <td>{{ ticket.time_submitted|timesince:now }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<div class="card">
+  <h5 class="card-header">INVALID</h5>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Assigned To</th>
+            <th scope="col">Reported By</th>
+            <th scope="col">Ticket Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ticket in invalid_tickets %}
+          <tr>
+            <th scope="row">{{ticket.id}}</th>
+              <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
+              <td>{{ticket.assignedto}}</td>
+              <td><a href="{% url 'userticketlist' ticket.createdby %}">{{ticket.createdby}}</a></td>
+              {% comment %} calculates difference between time ticket submitted and now 
+              resource link: https://tinyurl.com/yyjtydtk
+              {% endcomment %}
+              <td>{{ ticket.time_submitted|timesince:now }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 </div>
 
 {% endblock %}
