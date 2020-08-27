@@ -7,6 +7,10 @@
 {% block content %}
 <h1>Bug Tracker App Home</h1>
 
+{{ dt_submitted }}
+
+<button type="button" class="btn btn-secondary active"><a href='{% url 'addticket'%}'>Create Ticket</a></button>
+
 <div class="card">
             <h5 class="card-header">NEW</h5>
             <div class="card-body">
@@ -24,7 +28,7 @@
     {% for ticket in new_tickets %}
         <tr>
             <th scope="row">{{ticket.id}}</th>
-            <td>{{ticket.title}}</td>
+            <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
             <td>{{ticket.assignedto}}</td>
             <td>{{ticket.reportedby}}</td>
             <td>{{ticket.time_submitted}}</td>
@@ -52,7 +56,7 @@
     {% for ticket in done_tickets %}
         <tr>
             <th scope="row">{{ticket.id}}</th>
-            <td>{{ticket.title}}</td>
+            <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
             <td>{{ticket.assignedto}}</td>
             <td>{{ticket.reportedby}}</td>
             <td>{{ticket.time_submitted}}</td>
@@ -78,7 +82,7 @@
     {% for ticket in in_progress_tickets %}
         <tr>
             <th scope="row">{{ticket.id}}</th>
-            <td>{{ticket.title}}</td>
+            <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
             <td>{{ticket.assignedto}}</td>
             <td>{{ticket.reportedby}}</td>
             <td>{{ticket.time_submitted}}</td>
@@ -105,7 +109,7 @@
     {% for ticket in invalid_tickets %}
         <tr>
             <th scope="row">{{ticket.id}}</th>
-            <td>{{ticket.title}}</td>
+            <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
             <td>{{ticket.assignedto}}</td>
             <td>{{ticket.reportedby}}</td>
             <td>{{ticket.time_submitted}}</td>

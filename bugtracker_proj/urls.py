@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from bugtracker_app.views import index_view, add_ticket
+from bugtracker_app.views import index_view, add_ticket, ticket_detail_view
 
 urlpatterns = [
     path('', index_view, name='homepage'),
     path('add_ticket/', add_ticket, name='addticket'),
+    path('ticket/<int:ticket_id>/', ticket_detail_view, name='ticketdetail'),
     path('admin/', admin.site.urls),
 ]

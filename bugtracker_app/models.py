@@ -21,15 +21,16 @@ class Ticket(models.Model):
         choices=StatusChoices.choices,
         default=StatusChoices.NEW
     )
-    assignedto = models.CharField(
-        max_length=255, default='None')
-    completedby = models.CharField(max_length=255, default='None')
+    assignedto = models.ForeignKey(
+        CustomUserModel, null=True, default=None, on_delete=models.CASCADE, related_name='assignedto')
+    completedby = models.ForeignKey(
+        CustomUserModel, blank=True, null=True, default=None, on_delete=models.CASCADE, related_name='completedby')
 
     # Displays multiple columns in admin panel
     def __str__(self):
-        ret = self.title + ',' + self.status
+        ret = self.title + ',' + self.description + ',' + self.status
         return ret
     # Also displays multiple columns in admin panel
 
     class Meta:
-        unique_together = ['title']
+        unique_together = ['title', 'description']
