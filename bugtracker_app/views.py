@@ -18,11 +18,11 @@ def index_view(request):
     done_tickets = Ticket.objects.filter(status='Done')
     in_progress_tickets = Ticket.objects.filter(status='In Progress')
     invalid_tickets = Ticket.objects.filter(status='Invalid')
-    # Ticket Age
+    # The following two lines calculate difference between time ticket submitted and now
+    # resource link: https://tinyurl.com/yyjtydtk
     dt_submitted = Ticket.objects.dates('time_submitted', kind='day')
-
-    # ticket_age = dt_now - dt_submitted
-    return render(request, 'index.html', {"new_tickets": new_tickets, "done_tickets": done_tickets, "in_progress_tickets": in_progress_tickets, "invalid_tickets": invalid_tickets, "dt_submitted": dt_submitted})
+    now = timezone.now()
+    return render(request, 'index.html', {"new_tickets": new_tickets, "done_tickets": done_tickets, "in_progress_tickets": in_progress_tickets, "invalid_tickets": invalid_tickets, "dt_submitted": dt_submitted, "now": now})
 
 
 def add_ticket(request):

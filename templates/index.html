@@ -7,7 +7,6 @@
 {% block content %}
 <h1>Bug Tracker App Home</h1>
 
-{{ dt_submitted }}
 
 <button type="button" class="btn btn-secondary active"><a href='{% url 'addticket'%}'>Create Ticket</a></button>
 
@@ -31,7 +30,10 @@
             <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
             <td>{{ticket.assignedto}}</td>
             <td>{{ticket.reportedby}}</td>
-            <td>{{ticket.time_submitted}}</td>
+            {% comment %} calculates difference between time ticket submitted and now 
+            resource link: https://tinyurl.com/yyjtydtk
+            {% endcomment %}
+            <td>{{ ticket.time_submitted|timesince:now }}</td>
         </tr>
     {% endfor %}
   </tbody>
@@ -59,7 +61,7 @@
             <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
             <td>{{ticket.assignedto}}</td>
             <td>{{ticket.reportedby}}</td>
-            <td>{{ticket.time_submitted}}</td>
+            <td>{{ ticket.time_submitted|timesince:now }}</td>
         </tr>
     {% endfor %}
   </tbody>
@@ -85,7 +87,7 @@
             <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
             <td>{{ticket.assignedto}}</td>
             <td>{{ticket.reportedby}}</td>
-            <td>{{ticket.time_submitted}}</td>
+            <td>{{ ticket.time_submitted|timesince:now }}</td>
         </tr>
     {% endfor %}
   </tbody>
@@ -112,7 +114,7 @@
             <td><a href="{% url 'ticketdetail' ticket.id %}">{{ticket.title}}</a></td>
             <td>{{ticket.assignedto}}</td>
             <td>{{ticket.reportedby}}</td>
-            <td>{{ticket.time_submitted}}</td>
+            <td>{{ ticket.time_submitted|timesince:now }}</td>
         </tr>
     {% endfor %}
   </tbody>
