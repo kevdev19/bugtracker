@@ -42,6 +42,14 @@ def add_ticket(request):
     return render(request, "add_ticket.html", {"ticket_form": form})
 
 
+# Displays each ticket in detail
 def ticket_detail_view(request, ticket_id):
     ticket_detail_objs = Ticket.objects.filter(id=ticket_id).first()
     return render(request, 'ticket_detail.html', {"ticket_detail_objs": ticket_detail_objs})
+
+
+def user_ticket_list_view(request, user_name):
+    ticket_list = Ticket.objects.filter(createdby__username=user_name)
+    new_tickets = Ticket.objects.filter(status='New')
+    print(ticket_list)
+    return render(request, 'user_ticket_list.html', {"ticket_list": ticket_list, "new_tickets": new_tickets})
