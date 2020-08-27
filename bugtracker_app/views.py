@@ -23,6 +23,7 @@ def add_ticket(request):
             new_ticket = Ticket.objects.create(
                 title=data.get('title'),
                 description=data.get('description'),
+                createdby=request.user
             )
             if new_ticket:
                 return HttpResponseRedirect(reverse("homepage"))
