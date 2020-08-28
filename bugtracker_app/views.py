@@ -1,14 +1,16 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout, authenticate
 from django.utils import timezone
 
 from bugtracker_app.models import CustomUserModel, Ticket
 
-from .forms import TicketForm
+from .forms import TicketForm, LoginForm
 
 import datetime
 
 
+# @login_required
 def index_view(request):
     # These variables make multiple calls to the database
     # You could instead do:
@@ -24,6 +26,7 @@ def index_view(request):
     return render(request, 'index.html', {"new_tickets": new_tickets, "done_tickets": done_tickets, "in_progress_tickets": in_progress_tickets, "invalid_tickets": invalid_tickets, "now": now})
 
 
+@login_required
 def add_ticket(request):
     if request.method == "POST":
         form = TicketForm(request.POST)
@@ -53,3 +56,22 @@ def user_ticket_list_view(request, user_name):
     now = timezone.now()
     print(ticket_list)
     return render(request, 'user_ticket_list.html', {"ticket_list": ticket_list, "new_tickets": new_tickets, "now": now})
+
+
+def login_view(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            user = authenticate(request, username=data.get(
+                "username"), password=data.get("password"))
+            if user:
+                login(request, user)
+                return HttpResponseRedirect(request.GET.get('next', reverse('homepage')))
+
+    form = LoginForm()
+    return render(request, "login.html", {"form": form})
+
+
+def logout_view(request):
+    pass
