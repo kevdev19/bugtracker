@@ -41,10 +41,28 @@ def add_ticket(request):
                 return HttpResponseRedirect(reverse("homepage"))
 
     form = TicketForm()
-    return render(request, "add_ticket.html", {"ticket_form": form})
+    return render(request, "add_ticket.html", {"ticket_form": form, "ticket_type": "Add"})
+
+
+@login_required
+def edit_ticket_view(request, ticket_id):
+    edit_ticket = Ticket.objects.get(id=ticket_id)
+    if request.method == "POST":
+        form = TicketForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            edit_ticket.title = data['title']
+            edit_ticket.description = data['description']
+            edit_ticket.save()
+            return HttpResponseRedirect(reverse('ticketdetail', args=[edit_ticket.id]))
+
+    form = TicketForm(
+        initial={"title": edit_ticket.title, "description": edit_ticket.description})
+    return render(request, "add_ticket.html", {"ticket_form": form, "ticket_type": "Edit"})
 
 
 # Displays each ticket in detail
+@login_required
 def ticket_detail_view(request, ticket_id):
     ticket_detail_objs = Ticket.objects.filter(id=ticket_id).first()
     return render(request, 'ticket_detail.html', {"ticket_detail_objs": ticket_detail_objs})
@@ -56,6 +74,35 @@ def user_ticket_list_view(request, user_name):
     now = timezone.now()
     print(ticket_list)
     return render(request, 'user_ticket_list.html', {"ticket_list": ticket_list, "new_tickets": new_tickets, "now": now})
+
+
+@login_required
+def claim_ticket_view(request, ticket_id):
+    ticket = Ticket.objects.get(id=ticket_id)
+    ticket.assignedto = request.user
+    ticket.status = 'In Progress'
+    ticket.save()
+    return HttpResponseRedirect(reverse('ticketdetail', args=[ticket.id]))
+
+
+@login_required
+def invalid_ticket_view(request, ticket_id):
+    ticket = Ticket.objects.get(id=ticket_id)
+    ticket.assignedto = CustomUserModel.objects.get(username='None')
+    ticket.completedby = CustomUserModel.objects.get(username='None')
+    ticket.status = 'Invalid'
+    ticket.save()
+    return HttpResponseRedirect(reverse('ticketdetail', args=[ticket.id]))
+
+
+@login_required
+def complete_ticket_view(request, ticket_id):
+    ticket = Ticket.objects.get(id=ticket_id)
+    ticket.assignedto = CustomUserModel.objects.get(username='None')
+    ticket.completedby = request.user
+    ticket.status = 'Done'
+    ticket.save()
+    return HttpResponseRedirect(reverse('ticketdetail', args=[ticket.id]))
 
 
 def login_view(request):

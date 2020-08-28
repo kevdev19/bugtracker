@@ -7,13 +7,15 @@
 {% block content %}
 <h1>Bug Tracker App Home</h1>
 
+{% if user.is_authenticated %}
 
+<h3>Hello {{ user.username }}!</h3>
 <button type="button" class="btn btn-secondary active"><a href='{% url 'addticket'%}'>Create Ticket</a></button>
 
-{% if user.is_authenticated %}
-Hello {{ user.username }}!
+<span class="nav justify-content-end" style="position:absolute; top:5px; right:5px;">
+<button type="button" class="btn btn-secondary active"><a href="/logout/">Logout</a></button>
+</span>
 
-<button type="button" class="btn btn-default active"><a href="/logout/">Logout</a></button>
   <div class="card">
     <h5 class="card-header">NEW</h5>
       <div class="card-body">
